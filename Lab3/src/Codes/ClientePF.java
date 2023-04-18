@@ -125,12 +125,12 @@ public class ClientePF extends Cliente{
 		
 		return "Esse cliente tem nome " + getNome() + 
 				". Reside em " + getEndereco() +
-				". Possui o(s) veículo(s): " + listaVeiculosString + ".\n" +
+				". Possui o(s) veiculo(s): " + listaVeiculosString + ".\n" +
 				"Essa pessoa física tem CPF " + getCPF() +
 				", tem gênero" + getGenero() +
 				", sua data de licença é" + getDataLicenca() +
 				", em educação " + getEducacao() +
 				", sua data de nascimento é " + getDataNascimento() +
-				"e possui classe econômica " + getClasseEconomica() +".\n";
+				"e possui classe econômica " + getClasseEconomica() +".";
 	}
 }

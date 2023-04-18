@@ -33,14 +33,26 @@ public class Cliente
 	public void setListaVeiculos(ArrayList<Veiculo> listaVeiculos) {
 		this.listaVeiculos = listaVeiculos;
 	}
+	
+	public void addVeiculo (Veiculo veiculo)
+	{
+		if (listaVeiculos == null)
+		{
+			listaVeiculos = new ArrayList<>();
+			listaVeiculos.add(veiculo);
+		}else
+		{
+		this.listaVeiculos.add(veiculo);
+		}
+	}
 	@Override
 	public String toString() {
 		
 		String listaVeiculosString = getListaVeiculos().stream().map(Veiculo::toString).collect(Collectors.joining(""));
-		
+	
 		return "Esse cliente tem nome " + getNome() + 
 		". Reside em " + getEndereco() +
-		". Possui o(s) veículo(s): " + listaVeiculosString + ".\n";
+		". Possui o(s) veiculo(s): " + listaVeiculosString + ".";
 	}
 		
 	

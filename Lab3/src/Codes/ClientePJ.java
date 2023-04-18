@@ -50,9 +50,9 @@ public class ClientePJ extends Cliente {
 			return false;
 		}
 		
-		int d1, d2 = 0;
+		int d1 = 0, d2 = 0;
 		int soma = 0;
-		for (int m = 5; m > 1; m--)
+		for (int m = 5	; m > 1; m--)
 		{
 			soma += m * Character.getNumericValue(cnpj_int.charAt(5-m));
 		}
@@ -66,7 +66,7 @@ public class ClientePJ extends Cliente {
 			d1 = 0;
 		} else
 		{
-			d1 = soma/11 - soma%11;
+			d1 = 11 - soma%11;
 		}
 		
 		soma = 0;
@@ -85,7 +85,7 @@ public class ClientePJ extends Cliente {
 			d2 = 0;
 		} else
 		{
-			d1 = 11 - soma%11;
+			d2 = 11 - soma%11;
 		}
 		
 		if (d1 == Character.getNumericValue(cnpj_int.charAt(12))
@@ -105,9 +105,9 @@ public class ClientePJ extends Cliente {
 		
 		return "Esse cliente tem nome " + getNome() + 
 		". Reside em " + getEndereco() +
-		". Possui o(s) veículo(s): " + listaVeiculosString + ".\n" +
+		". Possui o(s) veiculo(s): " + listaVeiculosString + ".\n" +
 		"Essa pessoa jurídica possui o CNPJ " + getCNPJ() +
-		"e data de fundação " + getDataFundacao() + ".\n";	
+		" e data de fundação " + getDataFundacao() + ".";	
 	}
 
 }

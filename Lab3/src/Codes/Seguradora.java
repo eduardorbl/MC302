@@ -31,6 +31,22 @@ public class Seguradora
 		this.nome = nome;
 	}
 	
+	public ArrayList<Sinistro> getListaSinistros() {
+		return listaSinistros;
+	}
+
+	public void setListaSinistros(ArrayList<Sinistro> listaSinistros) {
+		this.listaSinistros = listaSinistros;
+	}
+
+	public ArrayList<Cliente> getListaClientes() {
+		return listaClientes;
+	}
+
+	public void setListaClientes(ArrayList<Cliente> listaClientes) {
+		this.listaClientes = listaClientes;
+	}
+
 	public String getTelefone ()
 	{
 		return this.telefone;
@@ -59,45 +75,103 @@ public class Seguradora
 	}
 
 	public boolean cadastrarCliente (Cliente cliente)
-	{
-		listaClientes.add(cliente);
-		return true;
+	{	
+		
+		if (listaClientes == null)
+		{
+			listaClientes = new ArrayList<>();
+		}
+		if (cliente instanceof ClientePF)
+		{
+			if (((ClientePF) cliente).validarCPF()) 
+			{
+				listaClientes.add(cliente);
+				return true;
+			} else {
+				return false;
+			}
+		} else
+		{
+			
+			if (((ClientePJ) cliente).validarCNPJ())
+			{
+				listaClientes.add(cliente);
+				return true;
+			} else
+			{
+				return false;
+			}
+		}
+
 	}
 	
 	public boolean removerCliente (Cliente cliente)
-	{
-		listaClientes.remove(cliente);
-		return true;
+	{	
+		if (listaClientes.contains(cliente))
+		{	
+			listaClientes.remove(cliente);
+			return true;
+		} else
+		{
+			return false;
+		}
 	}
 	
-	public boolean gerarSinistro ()
+	public boolean gerarSinistro (Sinistro sinistro)
 	{
-		Sinistro sinitro = new Sinistro(0, null, null, null, null, null);
-		this.listaSinistros.add(sinitro);
 		
-		return true;	
+		if (listaSinistros == null)
+		{
+			listaSinistros = new ArrayList<>();
+		}
+		this.listaSinistros.add(sinistro);
+		
+		return true;
 	}
 	
 	public boolean visualizarSinistro (String cliente)
 	{
-		
+		boolean sinistroExiste = false;
 		for (int i = 0; i < listaSinistros.size(); i++)
 		{
-			if (listaSinistros.get(i).getCliente().getNome() == cliente)
+			if (listaSinistros.get(i).getCliente().getNome().equals(cliente))
 			{
-				listaSinistros.get(i).toString();			
+				listaSinistros.get(i).toString();
+				sinistroExiste = true;
 			}
 		}
 		
-		return true;
+		return sinistroExiste;	
 	}
 	
 	public void listarSinistros()
-	{
+	{	
+		
 		for (int i = 0; i < listaSinistros.size(); i++)
 		{	
-			listaSinistros.get(i).toString();			
+			System.out.println(listaSinistros.get(i).toString());			
 		}
 		
 	}
+	
+	public String listarClientes()
+	{
+		String listaClientesString = "";
+		
+		for (int i = 0; i < listaClientes.size(); i++)
+		{
+			listaClientesString += listaClientes.get(i).toString() + "\n";
+		}
+		
+		return listaClientesString;
+	}
+
+	@Override
+	public String toString() {
+		return "Seguradora " + nome + " possui telefone "
+				+ telefone + " e email " + email + " e endereco "
+				+ endereco;
+	}
+	
+	
 }

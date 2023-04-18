@@ -21,7 +21,12 @@ public class Sinistro {
 		this.veiculo = veiculo;
 		this.cliente = cliente;
 		
+		if (listaID == null)
+		{
+			listaID = new ArrayList<>();
+		}
 		listaID.add(id);
+		
 	}
 	
 	public String getData() {
@@ -75,9 +80,9 @@ public class Sinistro {
 		return "O sinistro de ID " + id +
 				" ocorreu na data " + data +
 				" no endereço " + endereco + ".\n"
-				+ "Realizado pela seguradora " + seguradora +
-				", sendo o veículo " + veiculo +
-				" pertencente ao cliente " + cliente +".\n";
+				+ "Realizado pela seguradora " + seguradora.getNome() +
+				", sendo o veiculo " + veiculo.getModelo() +
+				" pertencente ao cliente " + cliente.getNome() +".\n";
 				
 	}
 
