@@ -80,41 +80,17 @@ public class Seguradora
 		if (listaClientes == null)
 		{
 			listaClientes = new ArrayList<>();
-		}
-		if (cliente instanceof ClientePF)
-		{
-			if (((ClientePF) cliente).validarCPF()) 
-			{
-				listaClientes.add(cliente);
-				return true;
-			} else {
-				return false;
-			}
-		} else
-		{
-			
-			if (((ClientePJ) cliente).validarCNPJ())
-			{
-				listaClientes.add(cliente);
-				return true;
-			} else
-			{
-				return false;
-			}
-		}
+		} 
+		
+		return listaClientes.add(cliente);
 
 	}
 	
 	public boolean removerCliente (Cliente cliente)
-	{	
-		if (listaClientes.contains(cliente))
-		{	
-			listaClientes.remove(cliente);
-			return true;
-		} else
-		{
-			return false;
-		}
+	{		
+		
+		return listaClientes.remove(cliente);
+		
 	}
 	
 	public boolean gerarSinistro (Sinistro sinistro)
@@ -124,9 +100,13 @@ public class Seguradora
 		{
 			listaSinistros = new ArrayList<>();
 		}
-		this.listaSinistros.add(sinistro);
 		
-		return true;
+		return this.listaSinistros.add(sinistro);
+	}
+	
+	public void removerSinistro(Sinistro sinistro)
+	{
+		listaSinistros.remove(sinistro);
 	}
 	
 	public boolean visualizarSinistro (String cliente)
@@ -154,6 +134,20 @@ public class Seguradora
 		
 	}
 	
+	public int qtdSinistros(Cliente cliente)
+	{
+		int qtd = 0;
+		for (int i = 0; i < listaSinistros.size(); i++)
+		{
+			if (listaSinistros.get(i).getCliente().equals(cliente))
+			{		
+				qtd++;
+			}
+		}
+		
+		return qtd;	
+	}
+	
 	public String listarClientes()
 	{
 		String listaClientesString = "";
@@ -164,6 +158,29 @@ public class Seguradora
 		}
 		
 		return listaClientesString;
+	}
+	
+	public void calcularPrecoSeguroCliente()
+	{
+		for (int i = 0; i < listaClientes.size(); i++)
+		{	
+			listaClientes.get(i).setValorSeguro(listaClientes.get(i).calculaScore() * (1 + qtdSinistros(listaClientes.get(i))));
+		}
+		
+	}
+	
+	public int calcularReceita()
+	{
+		int Receita = 0;
+		for (int i = 0; i < listaClientes.size(); i++)
+		{	
+			
+			Receita += listaClientes.get(i).getValorSeguro();		
+		}
+		
+		return Receita;
+		
+		
 	}
 
 	@Override

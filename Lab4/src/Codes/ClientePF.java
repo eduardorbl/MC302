@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+import java.util.Calendar;
+
 public class ClientePF extends Cliente{
 	
 	private final String cpf;
@@ -13,8 +15,8 @@ public class ClientePF extends Cliente{
 	private String classeEconomica;
 	
 	public ClientePF(String nome, String endereco, ArrayList<Veiculo> listaVeiculos, String cpf, String genero,
-			Date dataLicenca, String educacao, Date dataNascimento, String classeEconomica) {
-		super(nome, endereco, listaVeiculos);
+			Date dataLicenca, String educacao, Date dataNascimento, String classeEconomica, double valorSeguro) {
+		super(nome, endereco, listaVeiculos, valorSeguro);
 		this.cpf = cpf;
 		this.genero = genero;
 		this.dataLicenca = dataLicenca;
@@ -71,53 +73,6 @@ public class ClientePF extends Cliente{
 		return cpf;
 	}
 
-	public boolean validarCPF()
-	{
-	    String cpf_int = this.cpf.replaceAll("[^\\d]", "");
-
-	    if (cpf_int.length() != 11) {
-	        return false;
-	    }
-
-	    boolean allEqual = true;
-	    for (int i = 0; i < cpf_int.length(); i++) {
-	        if (cpf_int.charAt(9) != cpf_int.charAt(i)) {
-	            allEqual = false;
-	            break;
-	        }
-	    }
-	    
-	    if (allEqual) {
-	        return false;
-	    }
-
-	    int n = 0;
-	    int d1, d2;
-
-	    for (int i = 0; i < 9; i++) {
-	        n += Character.getNumericValue(cpf_int.charAt(i)) * (10 - i);
-	    }
-	    d1 = 11 - n % 11;
-	    if (d1 > 9) {
-	        d1 = 0;
-	    }
-
-	    n = 0;
-	    for (int i = 0; i < 10; i++) {
-	        n += Character.getNumericValue(cpf_int.charAt(i)) * (11 - i);
-	    }
-	    d2 = 11 - (n % 11);
-	    if (d2 > 9) {
-	        d2 = 0;
-	    }
-
-	    if (d1 == Character.getNumericValue(cpf_int.charAt(9)) && d2 == Character.getNumericValue(cpf_int.charAt(10))) {
-	        return true;
-	    } else {
-	        return false;
-	    }
-	}
-
 	@Override
 	public String toString() {
 		
@@ -126,11 +81,53 @@ public class ClientePF extends Cliente{
 		return "Esse cliente tem nome " + getNome() + 
 				". Reside em " + getEndereco() +
 				". Possui o(s) veiculo(s): " + listaVeiculosString + ".\n" +
-				"Essa pessoa física tem CPF " + getCPF() +
-				", tem gênero" + getGenero() +
-				", sua data de licença é" + getDataLicenca() +
-				", em educação " + getEducacao() +
-				", sua data de nascimento é " + getDataNascimento() +
-				"e possui classe econômica " + getClasseEconomica() +".";
+				"Essa pessoa fisica tem CPF " + getCPF() +
+				", tem genero " + getGenero() +
+				", sua data de licenca eh " + getDataLicenca() +
+				", em educacao " + getEducacao() +
+				", sua data de nascimento eh " + getDataNascimento() +
+				"e possui classe economica " + getClasseEconomica() +".";
+	}
+	
+	
+	private int idade ()
+	{
+		Calendar calendarNascimento = Calendar.getInstance();
+		Calendar calendarAtual = Calendar.getInstance();
+		
+		calendarNascimento.setTime(dataNascimento);
+		
+		int idade = calendarAtual.get(Calendar.YEAR) - calendarNascimento.get(Calendar.YEAR);
+		
+		if (calendarAtual.get(Calendar.MONTH) < calendarNascimento.get(Calendar.MONTH) || 			
+				(calendarAtual.get(Calendar.MONTH) == calendarNascimento.get(Calendar.MONTH) && calendarAtual.get(Calendar.DAY_OF_MONTH) < calendarNascimento.get(Calendar.DAY_OF_MONTH)))
+		{
+			idade--;
+		}
+		
+		return idade;
+	}
+	public double calculaScore()
+	{
+		int idade = idade();
+		int qtdVeiculos = getListaVeiculos().size();
+		double VALOR_BASE = CalcSeguro.VALOR_BASE.getConstante();
+		double FATOR_18_30 = CalcSeguro.FATOR_18_30.getConstante();
+		double FATOR_30_60 = CalcSeguro.FATOR_30_60.getConstante();
+		double FATOR_60_90 = CalcSeguro.FATOR_60_90.getConstante();
+		
+		double Score = 0;
+		if (idade < 30 && idade >= 18)
+		{
+			Score = VALOR_BASE * FATOR_18_30 * qtdVeiculos;
+		} else if (idade >= 30 && idade < 60)
+		{
+			Score = VALOR_BASE * FATOR_30_60 * qtdVeiculos;
+		} else if (idade >= 60 && idade <= 90)
+		{
+			Score = VALOR_BASE * FATOR_60_90 * qtdVeiculos;
+		}
+		
+		return Score;
 	}
 }

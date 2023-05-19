@@ -2,18 +2,27 @@ package Codes;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class Cliente
+abstract class Cliente
 {
+
 	private String nome;
 	private String endereco;
 	private ArrayList <Veiculo> listaVeiculos;
+	double valorSeguro;
 	
 	
-	public Cliente(String nome, String endereco, ArrayList<Veiculo> listaVeiculos) {
+	public Cliente(String nome, String endereco, ArrayList<Veiculo> listaVeiculos, double valorSeguro) {
 		super();
 		this.nome = nome;
 		this.endereco = endereco;
 		this.listaVeiculos = listaVeiculos;
+		this.valorSeguro = valorSeguro;
+	}
+	public double getValorSeguro() {
+		return valorSeguro;
+	}
+	public void setValorSeguro(double valorSeguro) {
+		this.valorSeguro = valorSeguro;
 	}
 	public String getNome() {
 		return nome;
@@ -45,6 +54,18 @@ public class Cliente
 		this.listaVeiculos.add(veiculo);
 		}
 	}
+	
+	public void excluirVeiculo (Veiculo veiculo)
+	{
+		for (Veiculo v: listaVeiculos)
+		{
+			if (v == veiculo)
+			{
+				this.listaVeiculos.remove(v);
+			}
+		}
+	}
+	
 	@Override
 	public String toString() {
 		
@@ -55,5 +76,5 @@ public class Cliente
 		". Possui o(s) veiculo(s): " + listaVeiculosString + ".";
 	}
 		
-	
+	public abstract double calculaScore();
 }

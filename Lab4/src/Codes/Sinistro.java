@@ -79,7 +79,7 @@ public class Sinistro {
 	public String toString() {
 		return "O sinistro de ID " + id +
 				" ocorreu na data " + data +
-				" no endereço " + endereco + ".\n"
+				" no endereco " + endereco + ".\n"
 				+ "Realizado pela seguradora " + seguradora.getNome() +
 				", sendo o veiculo " + veiculo.getModelo() +
 				" pertencente ao cliente " + cliente.getNome() +".\n";

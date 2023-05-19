@@ -1,0 +1,154 @@
+package Codes;
+
+public enum MenuOperacoesString {
+
+	CADASTRAR("(1)Cadastros"),
+	LISTAR("(2)Listar"),
+	EXCLUIIR("(3)Excluir"),
+	GERARSINISTRO("(4)Gerar Sinistro"),
+	TRANSFERIRSEGURO("(5)Transferir Seguro"),
+	CALCULARRECEITASEGURADORA("(6)Calcular Receita Seguradora"),
+	SAIR("(0)Sair");
+	
+	private final String operacao;
+	
+	private MenuOperacoesString(String operacao) {
+		
+		this.operacao = operacao;
+	}
+	
+	private final String getOperacao()
+	{
+		return operacao;
+	}
+	
+	public static void printarMenu()
+	{	
+		for (MenuOperacoesString op: MenuOperacoesString.values())
+		{
+			System.out.println(op.getOperacao());
+		}
+	}
+	
+	//ENUM CADASTRAR
+	public enum Cadastrar 
+	{
+		
+		CLIENTE("(1)Cadastrar Cliente"),
+		VEICULO("(2)Cadastrar Veiculo"),
+		SEGURADORA("(3)Cadastrar Seguradora"),
+		VOLTAR("(0)Retornar ao menu anterior");
+		
+		private final String cadastro;
+		
+		private Cadastrar(String cadastro)
+		{
+			this.cadastro = cadastro;
+		}
+
+		private String getCadastro()
+		{
+			return cadastro;
+		}
+		
+		public static void printarCadastrar()
+		{
+			for (Cadastrar cadastro: Cadastrar.values())
+			{
+				System.out.println(cadastro.getCadastro());
+			}
+		}
+		
+		public enum tipoCliente
+		{
+			
+			PF("(1)Cliente PF"),
+			PJ("(2)Cliente PJ"),
+			VOLTAR("(0)Retornar ao menu anterior");
+			
+			private final String tipo;
+			
+			private tipoCliente(String tipo)
+			{
+				this.tipo = tipo;
+			}
+			
+			private String getTipo()
+			{
+				return tipo;
+			}
+			
+			public static void printarTipo()
+			{
+				for (tipoCliente tipo: tipoCliente.values())
+				{
+					System.out.println(tipo.getTipo());
+				}
+			}
+		}
+		
+	}
+	
+	//ENUM LISTAR
+	public enum Listar
+	{
+		
+		CLIENTEPORSEG("(1)Listar clientes por seguradora"),
+		SINISTROPORSEG("(2)Listar sinistros por seguradora"),
+		SINISTROPORCLIENTE("(3)Listar sinistros por cliente"),
+		VEICULOPORCLIENTE("(4)Listar veiculos por cliente"),
+		VEICULOPORSEGURADORA("(5)Listar veiculos por seguradora"),
+		VOLTAR("(0)Retornar ao menu anterior");
+		
+		private final String lista;
+		
+		private Listar(String lista)
+		{
+			this.lista = lista;
+		}
+		
+		private String getLista()
+		{
+			return lista;
+		}
+		
+		public static void printarListar()
+		{
+			for (Listar lista: Listar.values())
+			{
+				System.out.println(lista.getLista());
+			}
+		}
+	}
+	
+	//ENUM EXCLUIR
+	
+	public enum Excluir
+	{
+		
+		CLIENTE("(1)Excluir cliente"),
+		VEICULO("(2)Excluir veiculo"),
+		SINISTRO("(3)Excluir sinistro"),
+		VOLTAR("(0)Retornar ao menu anterior");
+		
+		private final String exclusao;
+		
+		private Excluir(String exclusao)
+		{
+			this.exclusao = exclusao;
+		}
+		
+		private String getExclusao()
+		{
+			return exclusao;
+		}
+		
+		public static void printarExcluir()
+		{
+			for (Excluir exclusao: Excluir.values())
+			{
+				System.out.println(exclusao.getExclusao());
+			}
+		}		
+	}
+}
