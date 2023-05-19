@@ -1,0 +1,81 @@
+package Codes;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class funcoesListar {
+	
+	public static void listarClientePorSeguradora(ArrayList<Seguradora> listaSeguradoras)
+	{
+		Seguradora seg = Selecione.Seg(listaSeguradoras);
+		
+		for (Cliente cliente: seg.getListaClientes())
+		{
+			System.out.println(cliente.getNome());
+		}
+		
+	}
+
+	
+	public static void listarSinistrosPorSeguradora(ArrayList<Seguradora> listaSeguradoras)
+	{
+		Seguradora seg = Selecione.Seg(listaSeguradoras);
+		
+		for (Sinistro sinistro: seg.getListaSinistros())
+		{
+			System.out.println(sinistro.getId()+ " do cliente " + sinistro.getCliente().getNome());
+		}	
+	}
+	
+	public static void listarSinistroPorCliente(ArrayList<Seguradora> listaSeguradoras)
+	{
+		Seguradora seg = Selecione.Seg(listaSeguradoras);
+		
+		Cliente cliente = Selecione.Cliente(seg);
+		
+		for (Sinistro sinistro: seg.getListaSinistros())
+		{
+			if (sinistro.getCliente() == cliente)
+			{
+				System.out.println(sinistro.getId());
+			}
+		}
+	}
+	
+	public static void listarVeiculoPorCliente(ArrayList<Seguradora> listaSeguradoras)
+	{
+		Seguradora seg = Selecione.Seg(listaSeguradoras);
+		
+		Cliente cliente = Selecione.Cliente(seg);	
+		
+		for (Veiculo veiculo: cliente.getListaVeiculos())
+		{
+			System.out.println(veiculo.getMarca()+" "+veiculo.getModelo()+" " +veiculo.getAnoFabricacao()+ " de placa " + veiculo.getPlaca());
+		}
+	}
+	
+	public static void listarVeiculoPorSeguradora(ArrayList<Seguradora> listaSeguradoras)
+	{
+		Seguradora seg = Selecione.Seg(listaSeguradoras);
+		
+		for (Cliente cliente: seg.getListaClientes())
+		{
+			for (Veiculo veiculo: cliente.getListaVeiculos())
+			{
+				System.out.println(veiculo.getMarca() + " " + veiculo.getModelo()+ " " + veiculo.getAnoFabricacao() + " de placa "
+			+ veiculo.getPlaca());
+			}
+		}
+		
+	}
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

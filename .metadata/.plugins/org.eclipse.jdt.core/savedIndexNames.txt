@@ -1,0 +1,6 @@
+INDEX VERSION 1.132+C:\Users\giiih\OneDrive\Documents\Projeto dudu\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+3427023562.index
+1259207542.index
+3580456661.index
+1007340512.index
