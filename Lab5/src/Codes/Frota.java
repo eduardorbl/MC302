@@ -31,4 +31,8 @@ public class Frota {
 	{
 		return ListaVeiculos.remove(veiculo);
 	}
+	public int quantidadeVeiculos ()
+	{
+		return ListaVeiculos.size();
+	}
 }

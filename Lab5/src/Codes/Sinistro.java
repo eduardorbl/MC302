@@ -11,9 +11,8 @@ public class Sinistro {
 	private static ArrayList <Integer> listaID;
 	
 	//Constructor
-	public Sinistro(int id, String data, String endereco, Seguradora seguradora, Condutor condutor) {
+	public Sinistro(String data, String endereco, Seguradora seguradora, Condutor condutor) {
 		super();
-		this.id = id;
 		this.data = data;
 		this.endereco = endereco;
 		this.seguradora = seguradora;
@@ -22,8 +21,17 @@ public class Sinistro {
 		if (listaID == null)
 		{
 			listaID = new ArrayList<>();
+			listaID.add(0);
+			this.id = 0;
+
+		} else 
+		{
+			this.id = listaID.size();
+			listaID.add(listaID.size());
 		}
-		listaID.add(id);
+		
+		
+		
 	}
 
 	public String getData() {
@@ -60,17 +68,6 @@ public class Sinistro {
 
 	public static ArrayList<Integer> getListaID() {
 		return listaID;
-	}
-
-	public static boolean adcionarListaID(int ID) {
-		
-		if (listaID.contains(ID))
-		{
-			return false;
-		} else
-		{
-			return false;
-		}
 	}
 
 	public int getId() {

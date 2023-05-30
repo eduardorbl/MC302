@@ -3,4 +3,6 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="Codes.Cliente"/>
     <fullyQualifiedTypeName name="Codes.MenuOperacoes.Cadastrar.tipoCliente"/>
+    <fullyQualifiedTypeName name="java.util.Calendar"/>
+    <fullyQualifiedTypeName name="Codes.CalcSeguro"/>
 </qualifiedTypeNameHistroy>

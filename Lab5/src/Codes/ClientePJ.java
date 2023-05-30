@@ -1,22 +1,24 @@
 package Codes;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.stream.Collectors;
 
 public class ClientePJ extends Cliente {
 	
-	public ClientePJ(String nome, String endereco, ArrayList<Veiculo> listaVeiculos, String cnpj, Date dataFundacao, int qtdeFuncionarios, double valorSeguro) {
-		super(nome, endereco, listaVeiculos, valorSeguro);
-		this.cnpj = cnpj;
-		this.dataFundacao = dataFundacao;
-		this.qtdeFuncionarios = qtdeFuncionarios;
-	}
-	
+
 	private final String cnpj;
 	private Date dataFundacao;
-	private int qtdeFuncionarios;
+	private int quantidadeFunc;
+	private ArrayList<Frota> listaFrota;
 	
-	
+	public ClientePJ(String nome, String telefone, String endereco, String email, double valorSeguro, String cnpj,
+			Date dataFundacao, int quantidadeFunc, ArrayList<Frota> listaFrota) {
+		super(nome, telefone, endereco, email, valorSeguro);
+		this.cnpj = cnpj;
+		this.dataFundacao = dataFundacao;
+		this.quantidadeFunc = quantidadeFunc;
+		this.listaFrota = listaFrota;
+	}
 	public Date getDataFundacao() {
 		return dataFundacao;
 	}
@@ -26,36 +28,80 @@ public class ClientePJ extends Cliente {
 	public String getCNPJ() {
 		return cnpj;
 	}
-	
-	@Override
-	public String toString()
+	public ArrayList<Frota> getListaFrota() {
+		return listaFrota;
+	}
+	public void setListaFrota(ArrayList<Frota> listaFrota) {
+		this.listaFrota = listaFrota;
+	}
+		
+	public boolean removerFrotadaListaFrota (Frota frota)
 	{
-		String listaVeiculosString = getListaVeiculos().stream().map(Veiculo::toString).collect(Collectors.joining(""));
-		
-		return "Esse cliente tem nome " + getNome() + 
-		". Reside em " + getEndereco() +
-		". Possui o(s) veiculo(s): " + listaVeiculosString + ".\n" +
-		"Essa pessoa juridica possui o CNPJ " + getCNPJ() +
-		" e data de fundacao " + getDataFundacao() + ".";	
-	}
-	
-	public double calculaScore()
-	{
-		double VALOR_BASE = CalcSeguro.VALOR_BASE.getConstante();
-		int qtdVeiculos = getListaVeiculos().size();
-		
-		double Score = VALOR_BASE * (1 + (qtdeFuncionarios)/100) * qtdVeiculos;
-		
-		return Score;
-	}
-	public int getQtdeFuncionarios() {
-		return qtdeFuncionarios;
-	}
-	public void setQtdeFuncionarios(int qtdeFuncionarios) {
-		this.qtdeFuncionarios = qtdeFuncionarios;
+		return listaFrota.remove(frota);
 	}
 	public String getCnpj() {
 		return cnpj;
 	}
+	public int getQuantidadeFunc() {
+		return quantidadeFunc;
+	}
+	public void setQuantidadeFunc(int quantidadeFunc) {
+		this.quantidadeFunc = quantidadeFunc;
+	}
+	public boolean cadastrarFrota(Frota frota)
+	{
+		return listaFrota.add(frota);
+	}
+	public int quantidadeVeiculos()
+	{
+		int quantidade = 0;
+		for (Frota frota: listaFrota)
+		{
+			quantidade += frota.quantidadeVeiculos();
+		}
+		
+		return quantidade;
+	}
+	public boolean atualizarFrota(boolean atualiza, Frota frota, Veiculo veiculo)
+	{	
 
+		if (atualiza)
+		{
+			return frota.addVeiculo(veiculo);
+		} else
+		{
+			frota.removeVeiculo(veiculo);
+			if (frota.getListaVeiculos().size() == 0)
+			{
+				return removerFrotadaListaFrota(frota);
+			} else
+			{
+				return true;
+			}
+		}
+	
+	}
+	
+	public int anosPosFundacao ()
+	{
+		Calendar calendarNascimento = Calendar.getInstance();
+		Calendar calendarAtual = Calendar.getInstance();
+		
+		calendarNascimento.setTime(dataFundacao);
+		
+		int idade = calendarAtual.get(Calendar.YEAR) - calendarNascimento.get(Calendar.YEAR);
+		
+		if (calendarAtual.get(Calendar.MONTH) < calendarNascimento.get(Calendar.MONTH) || 			
+				(calendarAtual.get(Calendar.MONTH) == calendarNascimento.get(Calendar.MONTH) && calendarAtual.get(Calendar.DAY_OF_MONTH) < calendarNascimento.get(Calendar.DAY_OF_MONTH)))
+		{
+			idade--;
+		}
+		
+		return idade;
+	}
+	
+	public boolean getVeiculosPorFrota ()
+	{
+		return true;
+	}
 }

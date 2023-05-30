@@ -1,44 +1,34 @@
 package Codes;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.stream.Collectors;
-
 import java.util.Calendar;
+import java.util.Date;
 
 public class ClientePF extends Cliente{
 	
 	private final String cpf;
 	private String genero;
-	private Date dataLicenca;
 	private String educacao;
 	private Date dataNascimento;
-	private String classeEconomica;
+	private ArrayList<Veiculo> listaVeiculos;
 	
-	public ClientePF(String nome, String endereco, ArrayList<Veiculo> listaVeiculos, String cpf, String genero,
-			Date dataLicenca, String educacao, Date dataNascimento, String classeEconomica, double valorSeguro) {
-		super(nome, endereco, listaVeiculos, valorSeguro);
+	
+	
+	public ClientePF(String nome, String telefone, String endereco, String email, double valorSeguro, String cpf,
+			String genero, String educacao, Date dataNascimento, ArrayList<Veiculo> listaVeiculos) {
+		super(nome, telefone, endereco, email, valorSeguro);
 		this.cpf = cpf;
 		this.genero = genero;
-		this.dataLicenca = dataLicenca;
 		this.educacao = educacao;
 		this.dataNascimento = dataNascimento;
-		this.classeEconomica = classeEconomica;
+		this.listaVeiculos = listaVeiculos;
 	}
-	
+
 	public String getGenero() {
 		return genero;
 	}
 
 	public void setGenero(String genero) {
 		this.genero = genero;
-	}
-
-	public Date getDataLicenca() {
-		return dataLicenca;
-	}
-
-	public void setDataLicenca(Date dataLicenca) {
-		this.dataLicenca = dataLicenca;
 	}
 
 	public String getEducacao() {
@@ -57,40 +47,28 @@ public class ClientePF extends Cliente{
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getClasseEconomica() {
-		return classeEconomica;
-	}
-
-	public void setClasseEconomica(String classeEconomica) {
-		this.classeEconomica = classeEconomica;
-	}
-
 	public String getCPF() {
 		return cpf;
 	}
-	
-	public String getCpf() {
-		return cpf;
+
+	public ArrayList<Veiculo> getListaVeiculos() {
+		return listaVeiculos;
 	}
 
-	@Override
-	public String toString() {
-		
-		String listaVeiculosString = getListaVeiculos().stream().map(Veiculo::toString).collect(Collectors.joining(""));
-		
-		return "Esse cliente tem nome " + getNome() + 
-				". Reside em " + getEndereco() +
-				". Possui o(s) veiculo(s): " + listaVeiculosString + ".\n" +
-				"Essa pessoa fisica tem CPF " + getCPF() +
-				", tem genero " + getGenero() +
-				", sua data de licenca eh " + getDataLicenca() +
-				", em educacao " + getEducacao() +
-				", sua data de nascimento eh " + getDataNascimento() +
-				"e possui classe economica " + getClasseEconomica() +".";
+	public void setListaVeiculos(ArrayList<Veiculo> listaVeiculos) {
+		this.listaVeiculos = listaVeiculos;
 	}
 	
+	public boolean cadastrarVeiculo (Veiculo veiculo)
+	{
+		return listaVeiculos.add(veiculo);
+	}
 	
-	private int idade ()
+	public boolean removerVeiculo (Veiculo veiculo)
+	{
+		return listaVeiculos.remove(veiculo);
+	}
+	public double fatorIdade ()
 	{
 		Calendar calendarNascimento = Calendar.getInstance();
 		Calendar calendarAtual = Calendar.getInstance();
@@ -105,29 +83,19 @@ public class ClientePF extends Cliente{
 			idade--;
 		}
 		
-		return idade;
+		if (18 < idade && idade <= 30)
+		{
+			return CalcSeguro.FATOR_18_30.getConstante();	
+		} else if (30 < idade && idade <= 60)
+		{
+			return CalcSeguro.FATOR_30_60.getConstante();
+		} else 
+		{
+			return CalcSeguro.FATOR_60_90.getConstante();
+		} 
 	}
-	public double calculaScore()
-	{
-		int idade = idade();
-		int qtdVeiculos = getListaVeiculos().size();
-		double VALOR_BASE = CalcSeguro.VALOR_BASE.getConstante();
-		double FATOR_18_30 = CalcSeguro.FATOR_18_30.getConstante();
-		double FATOR_30_60 = CalcSeguro.FATOR_30_60.getConstante();
-		double FATOR_60_90 = CalcSeguro.FATOR_60_90.getConstante();
-		
-		double Score = 0;
-		if (idade < 30 && idade >= 18)
-		{
-			Score = VALOR_BASE * FATOR_18_30 * qtdVeiculos;
-		} else if (idade >= 30 && idade < 60)
-		{
-			Score = VALOR_BASE * FATOR_30_60 * qtdVeiculos;
-		} else if (idade >= 60 && idade <= 90)
-		{
-			Score = VALOR_BASE * FATOR_60_90 * qtdVeiculos;
-		}
-		
-		return Score;
-	}
+	
+	
+	
+
 }

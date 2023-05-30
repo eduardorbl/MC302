@@ -1,23 +1,23 @@
 package Codes;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 abstract class Cliente
 {
 
 	private String nome;
+	private String telefone;
 	private String endereco;
-	private ArrayList <Veiculo> listaVeiculos;
+	private String email;
 	double valorSeguro;
 	
-	
-	public Cliente(String nome, String endereco, ArrayList<Veiculo> listaVeiculos, double valorSeguro) {
+	public Cliente(String nome, String telefone, String endereco, String email, double valorSeguro) {
 		super();
 		this.nome = nome;
+		this.telefone = telefone;
 		this.endereco = endereco;
-		this.listaVeiculos = listaVeiculos;
+		this.email = email;
 		this.valorSeguro = valorSeguro;
 	}
+
 	public double getValorSeguro() {
 		return valorSeguro;
 	}
@@ -36,45 +36,20 @@ abstract class Cliente
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	public ArrayList<Veiculo> getListaVeiculos() {
-		return listaVeiculos;
-	}
-	public void setListaVeiculos(ArrayList<Veiculo> listaVeiculos) {
-		this.listaVeiculos = listaVeiculos;
-	}
 	
-	public void addVeiculo (Veiculo veiculo)
-	{
-		if (listaVeiculos == null)
-		{
-			listaVeiculos = new ArrayList<>();
-			listaVeiculos.add(veiculo);
-		}else
-		{
-		this.listaVeiculos.add(veiculo);
-		}
+	public String getTelefone() {
+		return telefone;
 	}
-	
-	public void excluirVeiculo (Veiculo veiculo)
-	{
-		for (Veiculo v: listaVeiculos)
-		{
-			if (v == veiculo)
-			{
-				this.listaVeiculos.remove(v);
-			}
-		}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
-	
-	@Override
-	public String toString() {
-		
-		String listaVeiculosString = getListaVeiculos().stream().map(Veiculo::toString).collect(Collectors.joining(""));
-	
-		return "Esse cliente tem nome " + getNome() + 
-		". Reside em " + getEndereco() +
-		". Possui o(s) veiculo(s): " + listaVeiculosString + ".";
+
+	public String getEmail() {
+		return email;
 	}
-		
-	public abstract double calculaScore();
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

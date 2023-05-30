@@ -80,6 +80,24 @@ public abstract class Seguro {
 	public void setValorMensal(int valorMensal) {
 		this.valorMensal = valorMensal;
 	}
+
+	public boolean autorizarCondutor(Condutor condutor)
+	{
+		
+		return listaCondutores.add(condutor);
+	}
 	
-	public abstract void autorizarCondutor();
+	public boolean desautorizarCondutor(Condutor condutor)
+	{
+		
+		return listaCondutores.remove(condutor);
+	}
+	
+	public abstract double calcularValor(Condutor condutor);
+	
+	public Sinistro gerarSinistro(String data, String endereco, Condutor condutor)
+	{
+		return new Sinistro (data, endereco, seguradora, condutor);
+	}
+
 }
