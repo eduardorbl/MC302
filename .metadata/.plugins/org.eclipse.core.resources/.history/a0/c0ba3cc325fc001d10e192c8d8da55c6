@@ -1,0 +1,15 @@
+package Codes;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public abstract class Seguro {
+	
+	private int id;
+	private Date dataInicio;
+	private Date dataFim;
+	private Seguradora seguradora;
+	private ArrayList<Sinistro> listaSinistros;
+	private ArrayList<Condutor> listaCondutores;
+	private int valorMensal;
+}
