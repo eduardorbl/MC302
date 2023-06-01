@@ -1,4 +1,7 @@
-INDEX VERSION 1.131+/home/ec2022/ra260551/Downloads/MC302 PASTA/MC302/.metadata/.plugins/org.eclipse.jdt.core
+INDEX VERSION 1.131+C:\Users\Administrator\Downloads\labs\.metadata\.plugins\org.eclipse.jdt.core
+2725142083.index
+1259207542.index
+1007340512.index
 1865797976.index
-2691112611.index
-471647324.index
+862341180.index
+3580456661.index

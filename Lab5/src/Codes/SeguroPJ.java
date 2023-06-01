@@ -32,12 +32,23 @@ public class SeguroPJ extends Seguro {
 	}
 
 	@Override
-	public void calcularValor() {
+	public double calcularValor(Condutor condutor) {
 		
+		int qtdSinistros = 0;
+		for (Sinistro sinistro: getListaSinistros())
+		{
+			if (sinistro.getCondutor() == condutor)
+			{
+				qtdSinistros++;
+			}
+		}
 		return CalcSeguro.VALOR_BASE.getConstante() * (10 + (cliente.getQuantidadeFunc()/10)) *
 				(1 + 1/(frota.quantidadeVeiculos() + 2)) *
 				(1 + 1/(cliente.anosPosFundacao() + 2)) *
-				()
+				(2 + getListaSinistros().size()/10) *
+				(5 + qtdSinistros/10);
+				
+		
 	}
 
 	

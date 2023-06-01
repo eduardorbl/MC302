@@ -7,6 +7,7 @@ public class SeguroPF extends Seguro {
 
 		private Veiculo veiculo;
 		private ClientePF cliente;
+		
 		public SeguroPF(int id, Date dataInicio, Date dataFim, Seguradora seguradora,
 				ArrayList<Sinistro> listaSinistros, ArrayList<Condutor> listaCondutores, int valorMensal,
 				Veiculo veiculo, ClientePF cliente) {
