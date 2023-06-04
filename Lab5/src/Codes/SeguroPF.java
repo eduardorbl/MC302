@@ -8,26 +8,65 @@ public class SeguroPF extends Seguro {
 		private Veiculo veiculo;
 		private ClientePF cliente;
 		
+		//Constructor
+		
+		/**
+		 * 
+		 * @param id
+		 * @param dataInicio
+		 * @param dataFim
+		 * @param seguradora
+		 * @param listaSinistros
+		 * @param listaCondutores
+		 * @param valorMensal
+		 * @param veiculo
+		 * @param cliente
+		 */
 		public SeguroPF(int id, Date dataInicio, Date dataFim, Seguradora seguradora,
 				ArrayList<Sinistro> listaSinistros, ArrayList<Condutor> listaCondutores, int valorMensal,
 				Veiculo veiculo, ClientePF cliente) {
-			super(id, dataInicio, dataFim, seguradora, listaSinistros, listaCondutores, valorMensal);
+			super(id, dataInicio, dataFim, seguradora, valorMensal);
 			this.veiculo = veiculo;
 			this.cliente = cliente;
 		}
+
+		//Getters & Setters
+		
+		/**
+		 * @return the veiculo
+		 */
 		public Veiculo getVeiculo() {
 			return veiculo;
 		}
+
+		/**
+		 * @param veiculo the veiculo to set
+		 */
 		public void setVeiculo(Veiculo veiculo) {
 			this.veiculo = veiculo;
 		}
+
+		/**
+		 * @return the cliente
+		 */
 		public ClientePF getCliente() {
 			return cliente;
 		}
+
+		/**
+		 * @param cliente the cliente to set
+		 */
 		public void setCliente(ClientePF cliente) {
 			this.cliente = cliente;
 		}
+		
+		//Methods
+		
 		@Override
+		/**
+		 * @param condutor
+		 * @return value of seguro
+		 */
 		public double calcularValor(Condutor condutor) {
 			
 			int quantidadeSinistrosCondutor = 0;
@@ -43,6 +82,8 @@ public class SeguroPF extends Seguro {
 					(5 + quantidadeSinistrosCondutor/10);
 			
 		}
+
+
 		
 		
 

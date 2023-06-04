@@ -6,11 +6,25 @@ import java.util.Date;
 public class ClientePJ extends Cliente {
 	
 
-	private final String cnpj;
+	private String cnpj;
 	private Date dataFundacao;
 	private int quantidadeFunc;
 	private ArrayList<Frota> listaFrota;
 	
+	//Constructor
+	
+	/**
+	 * 
+	 * @param nome
+	 * @param telefone
+	 * @param endereco
+	 * @param email
+	 * @param valorSeguro
+	 * @param cnpj
+	 * @param dataFundacao
+	 * @param quantidadeFunc
+	 * @param listaFrota
+	 */
 	public ClientePJ(String nome, String telefone, String endereco, String email, double valorSeguro, String cnpj,
 			Date dataFundacao, int quantidadeFunc, ArrayList<Frota> listaFrota) {
 		super(nome, telefone, endereco, email, valorSeguro);
@@ -19,39 +33,78 @@ public class ClientePJ extends Cliente {
 		this.quantidadeFunc = quantidadeFunc;
 		this.listaFrota = listaFrota;
 	}
-	public Date getDataFundacao() {
-		return dataFundacao;
-	}
-	public void setDataFundacao(Date dataFundacao) {
-		this.dataFundacao = dataFundacao;
-	}
-	public String getCNPJ() {
-		return cnpj;
-	}
-	public ArrayList<Frota> getListaFrota() {
-		return listaFrota;
-	}
-	public void setListaFrota(ArrayList<Frota> listaFrota) {
-		this.listaFrota = listaFrota;
-	}
-		
-	public boolean removerFrotadaListaFrota (Frota frota)
-	{
-		return listaFrota.remove(frota);
-	}
+	
+	//Getters & Setters
+	/**
+	 * @return the cnpj
+	 */
 	public String getCnpj() {
 		return cnpj;
 	}
+
+	/**
+	 * @param cnpj the cnpj to set
+	 */
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	/**
+	 * @return the dataFundacao
+	 */
+	public Date getDataFundacao() {
+		return dataFundacao;
+	}
+
+	/**
+	 * @param dataFundacao the dataFundacao to set
+	 */
+	public void setDataFundacao(Date dataFundacao) {
+		this.dataFundacao = dataFundacao;
+	}
+
+	/**
+	 * @return the quantidadeFunc
+	 */
 	public int getQuantidadeFunc() {
 		return quantidadeFunc;
 	}
+
+	/**
+	 * @param quantidadeFunc the quantidadeFunc to set
+	 */
 	public void setQuantidadeFunc(int quantidadeFunc) {
 		this.quantidadeFunc = quantidadeFunc;
 	}
+
+	/**
+	 * @return the listaFrota
+	 */
+	public ArrayList<Frota> getListaFrota() {
+		return listaFrota;
+	}
+
+	/**
+	 * @param listaFrota the listaFrota to set
+	 */
+	public void setListaFrota(ArrayList<Frota> listaFrota) {
+		this.listaFrota = listaFrota;
+	}
+
+	// Methods 
+	/**
+	 * 
+	 * @param frota
+	 * @return
+	 */
 	public boolean cadastrarFrota(Frota frota)
 	{
 		return listaFrota.add(frota);
 	}
+	/**
+	 * 
+	 * @return quantity of veiculos of cliente
+	 */
 	public int quantidadeVeiculos()
 	{
 		int quantidade = 0;
@@ -62,6 +115,13 @@ public class ClientePJ extends Cliente {
 		
 		return quantidade;
 	}
+	/**
+	 * 
+	 * @param atualiza
+	 * @param frota
+	 * @param veiculo
+	 * @return
+	 */
 	public boolean atualizarFrota(boolean atualiza, Frota frota, Veiculo veiculo)
 	{	
 
@@ -73,7 +133,7 @@ public class ClientePJ extends Cliente {
 			frota.removeVeiculo(veiculo);
 			if (frota.getListaVeiculos().size() == 0)
 			{
-				return removerFrotadaListaFrota(frota);
+				return getListaFrota().remove(frota);
 			} else
 			{
 				return true;
@@ -81,7 +141,10 @@ public class ClientePJ extends Cliente {
 		}
 	
 	}
-	
+	/**
+	 * 
+	 * @return age after foundation of cliente
+	 */
 	public int anosPosFundacao ()
 	{
 		Calendar calendarNascimento = Calendar.getInstance();
@@ -99,8 +162,12 @@ public class ClientePJ extends Cliente {
 		
 		return idade;
 	}
-	
-	public boolean getVeiculosPorFrota ()
+	/**
+	 * 
+	 * @param frota
+	 * @return 
+	 */
+	public boolean getVeiculosPorFrota (Frota frota)
 	{
 		return true;
 	}

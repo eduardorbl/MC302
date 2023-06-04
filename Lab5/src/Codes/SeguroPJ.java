@@ -8,9 +8,21 @@ public class SeguroPJ extends Seguro {
 	private Frota frota;
 	private ClientePJ cliente;
 	
+	/**
+	 * Constructor
+	 * @param id
+	 * @param dataInicio
+	 * @param dataFim
+	 * @param seguradora
+	 * @param listaSinistros
+	 * @param listaCondutores
+	 * @param valorMensal
+	 * @param frota
+	 * @param cliente
+	 */
 	public SeguroPJ(int id, Date dataInicio, Date dataFim, Seguradora seguradora, ArrayList<Sinistro> listaSinistros,
 			ArrayList<Condutor> listaCondutores, int valorMensal, Frota frota, ClientePJ cliente) {
-		super(id, dataInicio, dataFim, seguradora, listaSinistros, listaCondutores, valorMensal);
+		super(id, dataInicio, dataFim, seguradora, valorMensal);
 		this.frota = frota;
 		this.cliente = cliente;
 	}

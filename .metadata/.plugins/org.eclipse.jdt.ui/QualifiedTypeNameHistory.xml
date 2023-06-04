@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="Codes.Cliente"/>
     <fullyQualifiedTypeName name="Codes.MenuOperacoes.Cadastrar.tipoCliente"/>
     <fullyQualifiedTypeName name="java.util.Calendar"/>
     <fullyQualifiedTypeName name="Codes.CalcSeguro"/>
     <fullyQualifiedTypeName name="Codes.SeguroPF"/>
     <fullyQualifiedTypeName name="Codes.Sinistro"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

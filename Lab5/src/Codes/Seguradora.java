@@ -4,185 +4,227 @@ import java.util.ArrayList;
 
 public class Seguradora 
 {
-
+	private final String cnpj; 
 	private String nome;
 	private String telefone;
-	private String email;
 	private String endereco;
-	private ArrayList <Sinistro> listaSinistros;
+	private String email;
+	private ArrayList <Seguro> listaSeguros;
 	private ArrayList <Cliente> listaClientes;
-
-	//Constructor
-	public Seguradora (String nome, String telefone, String email, String endereco)
-	{
+	
+	/**
+	 * @param cnpj
+	 * @param nome
+	 * @param telefone
+	 * @param endereco
+	 * @param email
+	 * @param listaSeguros
+	 * @param listaClientes
+	 */
+	public Seguradora(String cnpj, String nome, String telefone, String endereco, String email,
+			ArrayList<Seguro> listaSeguros, ArrayList<Cliente> listaClientes) {
+		this.cnpj = cnpj;
 		this.nome = nome;
 		this.telefone = telefone;
+		this.endereco = endereco;
 		this.email = email;
-		this.endereco = endereco;	
+		this.listaSeguros = listaSeguros;
+		this.listaClientes = listaClientes;
 	}
 	
-	//Getter & Setter
-	public String getNome ()
-	{
-		return this.nome;
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
 	}
-	public void setNome (String nome)
-	{
+
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public ArrayList<Sinistro> getListaSinistros() {
-		return listaSinistros;
+
+
+	/**
+	 * @return the telefone
+	 */
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setListaSinistros(ArrayList<Sinistro> listaSinistros) {
-		this.listaSinistros = listaSinistros;
+
+	/**
+	 * @param telefone the telefone to set
+	 */
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
+
+	/**
+	 * @return the endereco
+	 */
+	public String getEndereco() {
+		return endereco;
+	}
+
+
+	/**
+	 * @param endereco the endereco to set
+	 */
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	/**
+	 * @return the listaSeguros
+	 */
+	public ArrayList<Seguro> getListaSeguros() {
+		return listaSeguros;
+	}
+
+
+	/**
+	 * @param listaSeguros the listaSeguros to set
+	 */
+	public void setListaSeguros(ArrayList<Seguro> listaSeguros) {
+		this.listaSeguros = listaSeguros;
+	}
+
+
+	/**
+	 * @return the listaClientes
+	 */
 	public ArrayList<Cliente> getListaClientes() {
 		return listaClientes;
 	}
 
+
+	/**
+	 * @param listaClientes the listaClientes to set
+	 */
 	public void setListaClientes(ArrayList<Cliente> listaClientes) {
 		this.listaClientes = listaClientes;
 	}
 
-	public String getTelefone ()
-	{
-		return this.telefone;
-	}
-	public void setTelefone (String telefone)
-	{
-		this.telefone = telefone;
-	}
-	
-	public String getEmail ()
-	{
-		return this.email;
-	}
-	public void setEmail (String email)
-	{
-		this.email = email;
-	}
-	
-	public String getEndereco ()
-	{
-		return this.endereco;
-	}
-	public void setEndereco (String endereco)
-	{
-		this.endereco = endereco;
-	}
 
+	/**
+	 * @return the cnpj
+	 */
+	public String getCnpj() {
+		return cnpj;
+	}
+	
+	//Methods
+	
+	public void listarClientes ()
+	{
+		for (Cliente cliente: listaClientes)
+		{
+			System.out.println(cliente);
+		}
+	}
+	/**
+	 * 
+	 * @param seguro
+	 * @return
+	 */
+	
+	public boolean gerarSeguro (Seguro seguro)
+	{
+		return listaSeguros.add(seguro);
+	}
+	/**
+	 * 
+	 * @param seguro
+	 * @return
+	 */
+	public boolean cancelarSeguro (Seguro seguro)
+	{
+		return listaSeguros.remove(seguro);
+	}
+	/**
+	 * 
+	 * @param cliente
+	 * @return
+	 */
 	public boolean cadastrarCliente (Cliente cliente)
-	{	
-		
-		if (listaClientes == null)
-		{
-			listaClientes = new ArrayList<>();
-		} 
-		
+	{
 		return listaClientes.add(cliente);
-
 	}
-	
+	/**
+	 * 
+	 * @param cliente
+	 * @return
+	 */
 	public boolean removerCliente (Cliente cliente)
-	{		
-		
+	{
 		return listaClientes.remove(cliente);
-		
 	}
-	
-	public boolean gerarSinistro (Sinistro sinistro)
+	/**
+	 * 
+	 * @param cliente
+	 * @return ArrayList of Seguros per CLiente
+	 */
+	public ArrayList<Seguro> getSegurosPorCliente (Cliente cliente)
 	{
-		
-		if (listaSinistros == null)
+		ArrayList<Seguro> listaSegPorCliente = new ArrayList<Seguro>();
+		for (Seguro seguro: listaSeguros)
 		{
-			listaSinistros = new ArrayList<>();
-		}
-		
-		return this.listaSinistros.add(sinistro);
-	}
-	
-	public void removerSinistro(Sinistro sinistro)
-	{
-		listaSinistros.remove(sinistro);
-	}
-	
-	public boolean visualizarSinistro (String cliente)
-	{
-		boolean sinistroExiste = false;
-		for (int i = 0; i < listaSinistros.size(); i++)
-		{
-			if (listaSinistros.get(i).getCliente().getNome().equals(cliente))
+			if (seguro.getCliente() == cliente)
 			{
-				listaSinistros.get(i).toString();
-				sinistroExiste = true;
+				listaSegPorCliente.add(seguro);
 			}
 		}
 		
-		return sinistroExiste;	
+		return listaSegPorCliente;
 	}
 	
-	public void listarSinistros()
-	{	
-		
-		for (int i = 0; i < listaSinistros.size(); i++)
-		{	
-			System.out.println(listaSinistros.get(i).toString());			
-		}
-		
-	}
-	
-	public int qtdSinistros(Cliente cliente)
+	/**
+	 * 
+	 * @param cliente
+	 * @return ArrayList with all sinistros from a cliente
+	 */
+	public ArrayList<Sinistro> getSinistrosPorCliente (Cliente cliente)
 	{
-		int qtd = 0;
-		for (int i = 0; i < listaSinistros.size(); i++)
+		ArrayList<Sinistro> listaSinistroPorCliente = new ArrayList<Sinistro>();
+		
+		ArrayList<Seguro> listaSegurosDoCliente = getSegurosPorCliente(cliente);
+		for (Seguro seguro: listaSegurosDoCliente)
 		{
-			if (listaSinistros.get(i).getCliente().equals(cliente))
-			{		
-				qtd++;
-			}
+			listaSinistroPorCliente.addAll(seguro.getListaSinistros());
 		}
-		
-		return qtd;	
+		return listaSinistroPorCliente;
 	}
-	
-	public String listarClientes()
-	{
-		String listaClientesString = "";
-		
-		for (int i = 0; i < listaClientes.size(); i++)
-		{
-			listaClientesString += listaClientes.get(i).toString() + "\n";
-		}
-		
-		return listaClientesString;
-	}
-	
-	public void calcularPrecoSeguroCliente()
-	{
-		for (int i = 0; i < listaClientes.size(); i++)
-		{	
-			listaClientes.get(i).setValorSeguro(listaClientes.get(i).calculaScore() * (1 + qtdSinistros(listaClientes.get(i))));
-		}
-		
-	}
-	
 	public int calcularReceita()
 	{
 		int Receita = 0;
-		for (int i = 0; i < listaClientes.size(); i++)
-		{	
-			
-			Receita += listaClientes.get(i).getValorSeguro();		
+		for (Cliente cliente: listaClientes)
+		{			
+			Receita += cliente.getValorSeguro();		
 		}
-		
-		return Receita;
-		
-		
+		return Receita;	
 	}
-
 	@Override
 	public String toString() {
 		return "Seguradora " + nome + " possui telefone "
