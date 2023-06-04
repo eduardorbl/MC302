@@ -165,10 +165,11 @@ public class ClientePJ extends Cliente {
 	/**
 	 * 
 	 * @param frota
-	 * @return 
+	 * @return list of veiculos in frota
 	 */
-	public boolean getVeiculosPorFrota (Frota frota)
+	public ArrayList<Veiculo> getVeiculosPorFrota (Frota frota)
 	{
-		return true;
+		return frota.getListaVeiculos();
 	}
+
 }

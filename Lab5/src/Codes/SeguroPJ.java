@@ -22,7 +22,7 @@ public class SeguroPJ extends Seguro {
 	 */
 	public SeguroPJ(int id, Date dataInicio, Date dataFim, Seguradora seguradora, ArrayList<Sinistro> listaSinistros,
 			ArrayList<Condutor> listaCondutores, int valorMensal, Frota frota, ClientePJ cliente) {
-		super(id, dataInicio, dataFim, seguradora, valorMensal);
+		super(id, dataInicio, dataFim, seguradora);
 		this.frota = frota;
 		this.cliente = cliente;
 	}
@@ -58,9 +58,21 @@ public class SeguroPJ extends Seguro {
 				(1 + 1/(frota.quantidadeVeiculos() + 2)) *
 				(1 + 1/(cliente.anosPosFundacao() + 2)) *
 				(2 + getListaSinistros().size()/10) *
-				(5 + qtdSinistros/10);
-				
-		
+				(5 + qtdSinistros/10);			
+	}
+
+	@Override
+	/**
+	 * @return value of total seguro
+	 */
+	public double calculaValorSeguro() {
+		double value = 0;
+		 
+		for (Condutor condutor: getListaCondutores())
+		{
+			value += calcularValor(condutor);
+		}
+		return value;
 	}
 
 	

@@ -11,7 +11,7 @@ public abstract class Seguro {
 	private Seguradora seguradora;
 	private ArrayList<Sinistro> listaSinistros;
 	private ArrayList<Condutor> listaCondutores;
-	private int valorMensal;
+	private double valorMensal;
 	
 	/**
 	 * Constructor
@@ -21,15 +21,14 @@ public abstract class Seguro {
 	 * @param seguradora
 	 * @param valorMensal
 	 */
-	public Seguro(int id, Date dataInicio, Date dataFim, Seguradora seguradora,
-			int valorMensal) {
+	public Seguro(int id, Date dataInicio, Date dataFim, Seguradora seguradora) {
 		this.id = id;
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 		this.seguradora = seguradora;
 		this.listaSinistros = new ArrayList<Sinistro>();
 		this.listaCondutores = new ArrayList<Condutor>();
-		this.valorMensal = valorMensal;
+		this.valorMensal = calculaValorSeguro();
 	}
 
 	//Getters & Setters
@@ -114,15 +113,16 @@ public abstract class Seguro {
 	/**
 	 * @return the valorMensal
 	 */
-	public int getValorMensal() {
+	public double getValorMensal() {
 		return valorMensal;
 	}
 
 	/**
 	 * @param valorMensal the valorMensal to set
 	 */
-	public void setValorMensal(int valorMensal) {
-		this.valorMensal = valorMensal;
+	public void atualizaValorMensal() 
+	{
+		this.valorMensal = calculaValorSeguro();
 	}
 	/**
 	 * 
@@ -169,5 +169,10 @@ public abstract class Seguro {
 	{
 		return new Sinistro (data, endereco, seguradora, condutor);
 	}
+	/**
+	 * 
+	 * @return total value of seguro
+	 */
+	public abstract double calculaValorSeguro();
 
 }

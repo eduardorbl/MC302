@@ -25,7 +25,7 @@ public class SeguroPF extends Seguro {
 		public SeguroPF(int id, Date dataInicio, Date dataFim, Seguradora seguradora,
 				ArrayList<Sinistro> listaSinistros, ArrayList<Condutor> listaCondutores, int valorMensal,
 				Veiculo veiculo, ClientePF cliente) {
-			super(id, dataInicio, dataFim, seguradora, valorMensal);
+			super(id, dataInicio, dataFim, seguradora);
 			this.veiculo = veiculo;
 			this.cliente = cliente;
 		}
@@ -65,7 +65,7 @@ public class SeguroPF extends Seguro {
 		@Override
 		/**
 		 * @param condutor
-		 * @return value of seguro
+		 * @return value of seguro per condutor
 		 */
 		public double calcularValor(Condutor condutor) {
 			
@@ -83,10 +83,21 @@ public class SeguroPF extends Seguro {
 			
 		}
 
-
+		@Override
+		/**
+		 * @return value of seguro total
+		 */
+		public double calculaValorSeguro() 
+		{
+			double valor = 0;
+			
+			for (Condutor condutor: getListaCondutores())
+			{
+				valor += calcularValor(condutor);
+			}
+			return valor;
+		}
 		
-		
-
 		
 		
 }
