@@ -14,9 +14,9 @@ public class Frota {
 	 * @param code
 	 * @param listaVeiculos
 	 */
-	public Frota(String code, ArrayList<Veiculo> listaVeiculos) {
+	public Frota(String code) {
 		this.code = code;
-		ListaVeiculos = listaVeiculos;
+		this.ListaVeiculos = new ArrayList<Veiculo>();
 	}
 
 	//Getters & Setters

@@ -27,13 +27,13 @@ public class ClientePF extends Cliente{
 	 * @param listaVeiculos
 	 */
 	public ClientePF(String nome, String telefone, String endereco, String email, double valorSeguro, String cpf,
-			String genero, String educacao, Date dataNascimento, ArrayList<Veiculo> listaVeiculos) {
+			String genero, String educacao, Date dataNascimento) {
 		super(nome, telefone, endereco, email, valorSeguro);
 		this.cpf = cpf;
 		this.genero = genero;
 		this.educacao = educacao;
 		this.dataNascimento = dataNascimento;
-		this.listaVeiculos = listaVeiculos;
+		this.listaVeiculos = new ArrayList<Veiculo>();
 	}
 	
 	//Getters & Setter
@@ -109,7 +109,18 @@ public class ClientePF extends Cliente{
 	public void setListaVeiculos(ArrayList<Veiculo> listaVeiculos) {
 		this.listaVeiculos = listaVeiculos;
 	}
-
+	
+	//Metodos
+	
+	/**
+	 * 
+	 * @param veiculo
+	 * @return
+	 */
+	public boolean cadastrarVeiculo (Veiculo veiculo)
+	{
+		return listaVeiculos.add(veiculo);
+	}
 	/**
 	 * 
 	 * @param veiculo

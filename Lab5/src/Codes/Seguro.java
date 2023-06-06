@@ -12,6 +12,7 @@ public abstract class Seguro {
 	private ArrayList<Sinistro> listaSinistros;
 	private ArrayList<Condutor> listaCondutores;
 	private double valorMensal;
+	private static ArrayList<Integer> listaID;
 	
 	/**
 	 * Constructor
@@ -19,16 +20,27 @@ public abstract class Seguro {
 	 * @param dataInicio
 	 * @param dataFim
 	 * @param seguradora
-	 * @param valorMensal
 	 */
-	public Seguro(int id, Date dataInicio, Date dataFim, Seguradora seguradora) {
-		this.id = id;
+	public Seguro(Date dataInicio, Date dataFim, Seguradora seguradora) {
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 		this.seguradora = seguradora;
 		this.listaSinistros = new ArrayList<Sinistro>();
 		this.listaCondutores = new ArrayList<Condutor>();
 		this.valorMensal = calculaValorSeguro();
+		
+		if (listaID == null)
+		{	
+			listaID = new ArrayList<Integer>();
+			listaID.add(0);
+			this.id = 0;
+
+		} else 
+		{
+			this.id = listaID.get(listaID.size()-1) + 1;
+			listaID.add(this.id);
+		}
+		
 	}
 
 	//Getters & Setters
@@ -114,6 +126,7 @@ public abstract class Seguro {
 	 * @return the valorMensal
 	 */
 	public double getValorMensal() {
+		this.valorMensal = calculaValorSeguro();
 		return valorMensal;
 	}
 
@@ -165,9 +178,17 @@ public abstract class Seguro {
 	 * @param condutor
 	 * @return generate a sinistro and return
 	 */
-	public Sinistro gerarSinistro(String data, String endereco, Condutor condutor)
+	public boolean gerarSinistro(Sinistro sinistro)
 	{
-		return new Sinistro (data, endereco, seguradora, condutor);
+		return listaSinistros.add(sinistro);
+	}
+	public boolean excluirSinistro(Sinistro sinistro)
+	{
+		return listaSinistros.remove(sinistro);
+	}
+	public boolean excluirCondutor (Condutor condutor)
+	{
+		return listaCondutores.remove(condutor);
 	}
 	/**
 	 * 

@@ -1,6 +1,5 @@
-package Codes;
+ package Codes;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class SeguroPF extends Seguro {
@@ -16,16 +15,12 @@ public class SeguroPF extends Seguro {
 		 * @param dataInicio
 		 * @param dataFim
 		 * @param seguradora
-		 * @param listaSinistros
-		 * @param listaCondutores
-		 * @param valorMensal
 		 * @param veiculo
 		 * @param cliente
 		 */
-		public SeguroPF(int id, Date dataInicio, Date dataFim, Seguradora seguradora,
-				ArrayList<Sinistro> listaSinistros, ArrayList<Condutor> listaCondutores, int valorMensal,
-				Veiculo veiculo, ClientePF cliente) {
-			super(id, dataInicio, dataFim, seguradora);
+		public SeguroPF(Date dataInicio, Date dataFim, Seguradora seguradora, Veiculo veiculo, 
+				ClientePF cliente) {
+			super(dataInicio, dataFim, seguradora);
 			this.veiculo = veiculo;
 			this.cliente = cliente;
 		}

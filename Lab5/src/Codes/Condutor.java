@@ -23,17 +23,16 @@ public class Condutor {
 	 * @param endereco
 	 * @param email
 	 * @param dataNasc
-	 * @param listaSinistros
 	 */
-	public Condutor(String cpf, String nome, String telefone, String endereco, String email, Date dataNasc,
-			ArrayList<Sinistro> listaSinistros) {
+	public Condutor(String cpf, String nome, String telefone, String endereco, String email, Date dataNasc) 
+	{
 		this.cpf = cpf;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.email = email;
 		this.dataNasc = dataNasc;
-		this.listaSinistros = listaSinistros;
+		this.listaSinistros = new ArrayList<Sinistro>();
 	}
 
 	//Getters & Setters

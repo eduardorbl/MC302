@@ -22,18 +22,18 @@ public class ClientePJ extends Cliente {
 	 * @param valorSeguro
 	 * @param cnpj
 	 * @param dataFundacao
-	 * @param quantidadeFunc
-	 * @param listaFrota
+	 * @paramquantidadeFunc
 	 */
 	public ClientePJ(String nome, String telefone, String endereco, String email, double valorSeguro, String cnpj,
-			Date dataFundacao, int quantidadeFunc, ArrayList<Frota> listaFrota) {
+			Date dataFundacao, int quantidadeFunc) 
+	{
 		super(nome, telefone, endereco, email, valorSeguro);
 		this.cnpj = cnpj;
 		this.dataFundacao = dataFundacao;
 		this.quantidadeFunc = quantidadeFunc;
-		this.listaFrota = listaFrota;
+		this.listaFrota = new ArrayList<Frota>();
 	}
-	
+
 	//Getters & Setters
 	/**
 	 * @return the cnpj
@@ -170,6 +170,11 @@ public class ClientePJ extends Cliente {
 	public ArrayList<Veiculo> getVeiculosPorFrota (Frota frota)
 	{
 		return frota.getListaVeiculos();
+	}
+	
+	public boolean excluirFrota (Frota frota)
+	{
+		return listaFrota.remove(frota);
 	}
 
 }

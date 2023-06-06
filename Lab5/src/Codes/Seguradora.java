@@ -18,18 +18,16 @@ public class Seguradora
 	 * @param telefone
 	 * @param endereco
 	 * @param email
-	 * @param listaSeguros
-	 * @param listaClientes
+	 * 
 	 */
-	public Seguradora(String cnpj, String nome, String telefone, String endereco, String email,
-			ArrayList<Seguro> listaSeguros, ArrayList<Cliente> listaClientes) {
+	public Seguradora(String cnpj, String nome, String telefone, String endereco, String email) {
 		this.cnpj = cnpj;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.email = email;
-		this.listaSeguros = listaSeguros;
-		this.listaClientes = listaClientes;
+		this.listaSeguros = new ArrayList<Seguro>();
+		this.listaClientes = new ArrayList<Cliente>();
 	}
 	
 	/**
@@ -216,14 +214,20 @@ public class Seguradora
 		}
 		return listaSinistroPorCliente;
 	}
-	public int calcularReceita()
+	public double calcularReceita()
 	{
-		int Receita = 0;
-		for (Cliente cliente: listaClientes)
-		{			
-			Receita += cliente.getValorSeguro();		
+		double Receita = 0;
+		for (Seguro seguro: listaSeguros)
+		{	
+			seguro.atualizaValorMensal();
+			Receita += seguro.getValorMensal();		
 		}
 		return Receita;	
+	}
+	
+	public boolean excluirSeguro (Seguro seguro)
+	{
+		return listaSeguros.remove(seguro);
 	}
 	@Override
 	public String toString() {

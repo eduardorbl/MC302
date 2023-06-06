@@ -2,8 +2,8 @@ package Codes;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import Codes.MenuOperacoes.Cadastrar.tipoCliente;
+import Codes.MenuOperacoes.Cadastrar.tipoSeguro;
 
 public class Menu {
 	
@@ -40,104 +40,24 @@ public class Menu {
 					iniciarMenuExcluir();
 					break;
 				case GERARSINISTRO:
-					gerarSinistro();
-					
-					break;
-				case TRANSFERIRSEGURO:
-					transferirSeguro();
-					break;
+					funcoesCadastrar.cadastroSinistro(listaSeguradoras);
 				case CALCULARRECEITASEGURADORA:
-					calcularReceita();
+					Seguradora seguradora = Scan.Selecione("uma seguradora", listaSeguradoras);
+					System.out.println("Receita:" + seguradora.calcularReceita()+"R$");
 					break;
 				case SAIR:
 					System.out.println("Saindo...");
 					break;
 				case ERRO:
 					System.out.println("Digite um numero que se enquadre nas opcoes. " + op_string
-							+ " nao se enquadra!");
-					
+							+ " nao se enquadra!");					
 					break;
+			default:
+				break;
 				}
 			
 		} while (op != MenuOperacoes.SAIR);
 		
-	}
-	
-	private static void gerarSinistro() {
-		System.out.println("Selecione a seguradora");
-		
-		for (int i = 0; i < listaSeguradoras.size(); i++)
-		{
-			System.out.println("(" + i + ")" + listaSeguradoras.get(i).getNome());
-		}
-		boolean erro = true;
-		Seguradora seg = null;
-		do {
-			String seg_string = s.nextLine();
-			try {
-				seg = listaSeguradoras.get(Integer.parseInt(seg_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);
-		
-		System.out.println("Selecione o cliente");
-		
-		for (int i = 0; i < seg.getListaClientes().size(); i++)
-		{
-			System.out.println("(" + i + ")" + seg.getListaClientes().get(i).getNome());
-		}
-		erro = true;
-		Cliente cliente = null;
-		do {
-			String cliente_string = s.nextLine();
-			try {
-				cliente = seg.getListaClientes().get(Integer.parseInt(cliente_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);	
-		
-		System.out.println("Selecione o veiculo");
-		
-		for (int i = 0; i < cliente.getListaVeiculos().size(); i++)
-		{
-			System.out.println("(" + i + ")" + cliente.getListaVeiculos().get(i).toString());
-		}
-		erro = true;
-		Veiculo veiculo = null;
-		do {
-			String veiculo_string = s.nextLine();
-			try {
-				veiculo = cliente.getListaVeiculos().get(Integer.parseInt(veiculo_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);
-		
-		System.out.println("Digite o id");
-		int id = 0;
-		do {
-			String id_string = s.nextLine();
-			try {
-				id = Integer.parseInt(id_string);
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);	
-		
-		System.out.println("Digite a data do sinistro (dd/mm/yyyy)");
-		String data = s.nextLine();
-		
-		System.out.println("Digite o endereco");
-		String endereco = s.nextLine();
-		
-		Sinistro sinistro = new Sinistro(id, data, endereco, seg, veiculo,cliente);
-		seg.gerarSinistro(sinistro);
 	}
 
 	public static void iniciarMenuCadastro()
@@ -168,6 +88,14 @@ public class Menu {
 				case SEGURADORA:
 					funcoesCadastrar.cadastrarSeguradora(listaSeguradoras);
 					break;
+				case CONDUTOR:
+					funcoesCadastrar.cadastrarCondutor(listaSeguradoras);
+					break;
+				case FROTA:
+					funcoesCadastrar.cadastroFrota(listaSeguradoras);
+					break;
+				case SEGURO:
+					cadastrarSeguro();
 				case VOLTAR:
 					System.out.println("Voltando...");
 					break;
@@ -220,6 +148,47 @@ public class Menu {
 		} while (tipo != MenuOperacoes.Cadastrar.tipoCliente.VOLTAR);	
 	}
 	
+	public static void cadastrarSeguro()
+	{
+		tipoSeguro tipo;
+		
+		do
+		{	
+			MenuOperacoesString.Cadastrar.tipoSeguro.printarTipo();
+			String tipo_string = s.nextLine();
+			try
+			{
+				tipo = MenuOperacoes.Cadastrar.tipoSeguro.fromInt(Integer.parseInt(tipo_string));
+			
+			} catch (Exception e)
+			{
+				tipo = MenuOperacoes.Cadastrar.tipoSeguro.ERRO;
+			}
+			
+			if (tipo == null)
+			{
+				tipo = MenuOperacoes.Cadastrar.tipoSeguro.ERRO;
+			}
+			
+			switch (tipo) {
+			case PF: 
+				funcoesCadastrar.cadastroSegPF(listaSeguradoras);
+				break;
+			case PJ:
+				funcoesCadastrar.cadastroSegPJ(listaSeguradoras);
+				break;
+			case VOLTAR:
+				break;
+				
+			case ERRO:
+				System.out.println("Digite um numero que se enquadre nas opcoes. " + tipo_string
+						+ " nao se enquadra!");
+				break;
+			}
+		} while (tipo != MenuOperacoes.Cadastrar.tipoSeguro.VOLTAR);	
+	}
+
+	
 	public static void iniciarMenuLista()
 	{	
 		MenuOperacoes.Listar op;
@@ -243,18 +212,17 @@ public class Menu {
 				case CLIENTEPORSEG: 
 					funcoesListar.listarClientePorSeguradora(listaSeguradoras);
 					break;
-				case SINISTROSPORSEG:
-					funcoesListar.listarSinistrosPorSeguradora(listaSeguradoras);
-					break;
 				case SINISTROPORCLIENTE:
 					funcoesListar.listarSinistroPorCliente(listaSeguradoras);
 					break;
 				case VEICULOPORCLIENTE:
 					funcoesListar.listarVeiculoPorCliente(listaSeguradoras);
 					break;
-				case VEICULOPORSEGURADORA:
-					funcoesListar.listarVeiculoPorSeguradora(listaSeguradoras);
+				case CONDUTORPORSEGURADORA:
+					funcoesListar.listarCondutorPorSeguro(listaSeguradoras);
 					break;
+				case SEGUROPORSEGURADORA:
+					funcoesListar.listarSeguroPorSeguradora(listaSeguradoras);
 				case VOLTAR:
 					System.out.println("Voltando...");
 					break;
@@ -296,6 +264,17 @@ public class Menu {
 				case SINISTRO:
 					funcoesExcluir.excluirSinstro(listaSeguradoras);
 					break;
+				case SEGURADORA:
+					funcoesExcluir.excluirSeguradora(listaSeguradoras);
+					break;
+				case FROTA:
+					funcoesExcluir.excluirFrota(listaSeguradoras);
+					break;
+				case CONDUTOR:
+					funcoesExcluir.excluirCondutor(listaSeguradoras);
+					break;
+				case SEGURO:
+					funcoesExcluir.excluirSeguro(listaSeguradoras);
 				case VOLTAR:
 					System.out.println("Voltando...");
 					break;
@@ -308,89 +287,5 @@ public class Menu {
 		} while (op != MenuOperacoes.Excluir.VOLTAR);	
 	}
 	
-	public static void transferirSeguro()
-	{
-		System.out.println("Selecione a seguradora");
-		
-		for (int i = 0; i < listaSeguradoras.size(); i++)
-		{
-			System.out.println("(" + i + ")" + listaSeguradoras.get(i).getNome());
-		}
-		boolean erro = true;
-		Seguradora seg = null;
-		do {
-			String seg_string = s.nextLine();
-			try {
-				seg = listaSeguradoras.get(Integer.parseInt(seg_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);
-		
-		System.out.println("Selecione o cliente que passara o seguro");
-		
-		for (int i = 0; i < seg.getListaClientes().size(); i++)
-		{
-			System.out.println("(" + i + ")" + seg.getListaClientes().get(i).getNome());
-		}
-		erro = true;
-		Cliente cliente = null;
-		do {
-			String cliente_string = s.nextLine();
-			try {
-				cliente = seg.getListaClientes().get(Integer.parseInt(cliente_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);
-		
-		System.out.println("Selecione o cliente que recebera o seguro");
-		
-		for (int i = 0; i < seg.getListaClientes().size(); i++)
-		{
-			System.out.println("(" + i + ")" + seg.getListaClientes().get(i).getNome());
-		}
-		erro = true;
-		Cliente cliente1 = null;
-		do {
-			String cliente_string = s.nextLine();
-			try {
-				cliente1 = seg.getListaClientes().get(Integer.parseInt(cliente_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);
-		
-		for (Veiculo v: cliente.getListaVeiculos())
-		{
-			cliente1.addVeiculo(v);
-		}
-		
-		cliente.setListaVeiculos(null);
-		
-	}
-	public static void calcularReceita()
-	{
-		System.out.println("Selecione a seguradora");
-		
-		for (int i = 0; i < listaSeguradoras.size(); i++)
-		{
-			System.out.println("(" + i + ")" + listaSeguradoras.get(i).getNome());
-		}
-		boolean erro = true;
-		Seguradora seg = null;
-		do {
-			String seg_string = s.nextLine();
-			try {
-				seg = listaSeguradoras.get(Integer.parseInt(seg_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);
-		System.out.println(seg.calcularReceita());
-	}
+
 }

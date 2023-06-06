@@ -124,15 +124,15 @@ public class Validacao
 	
 	public static boolean validarNome (String Nome)
 	{
-		boolean temApenasLetras = false;
 		
-		if (Nome.matches("^[a-zA-Z\\s-]+$")) 
-		{
-			temApenasLetras = true;
-		}
+		return Nome.matches("^[a-zA-Z\\s-]+$");
 		
-		return temApenasLetras;
-		
+	}
+	
+	public static boolean validarTelefone (String Telefone)
+	{
+		return Telefone.matches("\\d+");
+
 	}
 	
 	

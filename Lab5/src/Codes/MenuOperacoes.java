@@ -6,8 +6,7 @@ public enum MenuOperacoes
 	LISTAR(2),
 	EXCLUIR(3),
 	GERARSINISTRO(4),
-	TRANSFERIRSEGURO(5),
-	CALCULARRECEITASEGURADORA(6),
+	CALCULARRECEITASEGURADORA(5),
 	SAIR(0),
 	ERRO(-1);
 	
@@ -38,6 +37,9 @@ public enum MenuOperacoes
 		CLIENTE(1),
 		VEICULO(2),
 		SEGURADORA(3),
+		CONDUTOR(4),
+		FROTA(5),
+		SEGURO(6),
 		VOLTAR(0),
 		ERRO(-1);
 		
@@ -96,16 +98,50 @@ public enum MenuOperacoes
 			}
 		}
 		
+		public enum tipoSeguro
+		{
+			
+			PF(1),
+			PJ(2),
+			VOLTAR(0),
+			ERRO(-1);
+			
+			private final int tipo;
+			
+			private tipoSeguro(int tipo)
+			{
+				this.tipo = tipo;
+			}
+			
+			public int getTipo()
+			{
+				return tipo;
+			}
+			
+			public static tipoSeguro fromInt(int i)
+			{
+				
+				for (tipoSeguro tipo: tipoSeguro.values())
+				{
+					if (tipo.getTipo() == i)
+					{
+						return tipo;
+					}
+				}	
+				return null;
+			}
+		}
+		
 	}
 	
 	//ENUM LISTAR
 	public enum Listar
 	{
 		CLIENTEPORSEG(1),
-		SINISTROSPORSEG(2),
-		SINISTROPORCLIENTE(3),
-		VEICULOPORCLIENTE(4),
-		VEICULOPORSEGURADORA(5),
+		SINISTROPORCLIENTE(2),
+		VEICULOPORCLIENTE(3),
+		CONDUTORPORSEGURADORA(4),
+		SEGUROPORSEGURADORA(5),
 		VOLTAR(0),
 		ERRO(-1);
 		
@@ -138,6 +174,10 @@ public enum MenuOperacoes
 		CLIENTE(1),
 		VEICULO(2),
 		SINISTRO(3),
+		SEGURADORA(4),
+		FROTA(5),
+		CONDUTOR(6),
+		SEGURO(7),
 		VOLTAR(0),
 		ERRO(-1);
 		

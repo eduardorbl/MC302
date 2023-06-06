@@ -1,154 +1,110 @@
 package Codes;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class funcoesExcluir {
 	
-	private static Scanner s = new Scanner(System.in);
-	
 	public static void excluirCliente(ArrayList<Seguradora> listaSeguradoras)
-
 	{
-		System.out.println("Selecione a seguradora");
+		Seguradora seguradora = Scan.Selecione("uma seguradora", listaSeguradoras);
+		if (seguradora == null) return;
 		
-		for (int i = 0; i < listaSeguradoras.size(); i++)
-		{
-			System.out.println("(" + i + ")" + listaSeguradoras.get(i).getNome());
-		}
-		boolean erro = true;
-		Seguradora seg = null;
-		do {
-			String seg_string = s.nextLine();
-			try {
-				seg = listaSeguradoras.get(Integer.parseInt(seg_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);
+		Cliente cliente = Scan.Selecione("um cliente", seguradora.getListaClientes());
+		if (cliente == null) return;
 		
-		System.out.println("Selecione o cliente");
-		
-		for (int i = 0; i < seg.getListaClientes().size(); i++)
-		{
-			System.out.println("(" + i + ")" + seg.getListaClientes().get(i).getNome());
-		}
-		erro = true;
-		Cliente cliente = null;
-		do {
-			String cliente_string = s.nextLine();
-			try {
-				cliente = seg.getListaClientes().get(Integer.parseInt(cliente_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);	
-		
-		seg.removerCliente(cliente);
+		seguradora.removerCliente(cliente);
+				
 	}
 	
 	public static void excluirVeiculo(ArrayList<Seguradora> listaSeguradoras)
 	{
-		System.out.println("Selecione a seguradora");
+		Seguradora seguradora = Scan.Selecione("uma seguradora", listaSeguradoras);
+		if (seguradora == null) return;
+
+		Cliente cliente = Scan.Selecione("um cliente", seguradora.getListaClientes());
+		if (cliente == null) return;
 		
-		for (int i = 0; i < listaSeguradoras.size(); i++)
+		if (cliente instanceof ClientePF)
+		{	
+			ClientePF c = (ClientePF)cliente;
+			Veiculo veiculo = Scan.Selecione("um veiculo", c.getListaVeiculos());
+			c.removerVeiculo(veiculo);
+		} else
 		{
-			System.out.println("(" + i + ")" + listaSeguradoras.get(i).getNome());
+			ClientePJ c = (ClientePJ)cliente;
+			Frota frota = Scan.Selecione("uma frota", c.getListaFrota());
+			Veiculo veiculo = Scan.Selecione("um veiculo", frota.getListaVeiculos());
+			c.atualizarFrota(false, frota, veiculo);
 		}
-		boolean erro = true;
-		Seguradora seg = null;
-		do {
-			String seg_string = s.nextLine();
-			try {
-				seg = listaSeguradoras.get(Integer.parseInt(seg_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);
-		
-		System.out.println("Selecione o cliente");
-		
-		for (int i = 0; i < seg.getListaClientes().size(); i++)
-		{
-			System.out.println("(" + i + ")" + seg.getListaClientes().get(i).getNome());
-		}
-		erro = true;
-		Cliente cliente = null;
-		do {
-			String cliente_string = s.nextLine();
-			try {
-				cliente = seg.getListaClientes().get(Integer.parseInt(cliente_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);	
-		
-		System.out.println("Selecione o veiculo");
-		
-		for (int i = 0; i < cliente.getListaVeiculos().size(); i++)
-		{
-			System.out.println("(" + i + ")" + cliente.getListaVeiculos().get(i).toString());
-		}
-		erro = true;
-		Veiculo veiculo = null;
-		do {
-			String veiculo_string = s.nextLine();
-			try {
-				veiculo = cliente.getListaVeiculos().get(Integer.parseInt(veiculo_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);
-		
-		cliente.excluirVeiculo(veiculo);
-	
+
 	}
 	
 	public static void excluirSinstro(ArrayList<Seguradora> listaSeguradoras)
 	{
-		System.out.println("Selecione a seguradora");
+		Seguradora seguradora = Scan.Selecione("uma seguradora", listaSeguradoras);
+		if (seguradora == null) return;
 		
-		for (int i = 0; i < listaSeguradoras.size(); i++)
-		{
-			System.out.println("(" + i + ")" + listaSeguradoras.get(i).getNome());
-		}
-		boolean erro = true;
-		Seguradora seg = null;
-		do {
-			String seg_string = s.nextLine();
-			try {
-				seg = listaSeguradoras.get(Integer.parseInt(seg_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);
+		Seguro seguro = Scan.Selecione("um sinistro", seguradora.getListaSeguros());
+		if (seguro == null) return;
 		
-		System.out.println("Selecione o sinistro");
+		Sinistro sinistro = Scan.Selecione("um sinistro", seguro.getListaSinistros());
+		if (sinistro == null) return;
 		
-		for (int i = 0; i < seg.getListaSinistros().size(); i++)
-		{
-			System.out.println("(" + i + ")" + seg.getListaSinistros().get(i).getId());
-		}
-		erro = true;
-		Sinistro sinistro = null;
-		do {
-			String sinistro_string = s.nextLine();
-			try {
-				sinistro = seg.getListaSinistros().get(Integer.parseInt(sinistro_string));
-				erro = false;
-			} catch (Exception e) {
-				System.out.println("Valor invalido! Digite novamente");
-			}
-		} while (erro);
-		
-		seg.removerSinistro(sinistro);
+		seguro.excluirSinistro(sinistro);
+	}
 	
+	public static void excluirSeguradora(ArrayList<Seguradora> listaSeguradoras)
+	{
+		Seguradora seguradora = Scan.Selecione("uma seguradora", listaSeguradoras);
+		if (seguradora == null) return;
+		listaSeguradoras.remove(seguradora);
+	}
+	
+	public static void excluirFrota (ArrayList<Seguradora> listaSeguradoras)
+	{
+		Seguradora seguradora = Scan.Selecione("uma seguradora", listaSeguradoras);
+		if (seguradora == null) return;
+		
+		ArrayList<ClientePJ> lista = new ArrayList<ClientePJ>();
+		for (Cliente cliente: seguradora.getListaClientes())
+		{
+			if (cliente instanceof ClientePJ)
+			{
+				ClientePJ c = (ClientePJ)cliente;
+				lista.add(c);
+			}
+		}
+		
+		ClientePJ cliente = Scan.Selecione("um cliente", lista);
+		if (cliente == null) return;
+		Frota frota = Scan.Selecione("uma frota", cliente.getListaFrota());
+		if (frota == null) return;
+		
+		cliente.excluirFrota(frota);
+	}
+	
+	public static void excluirCondutor (ArrayList<Seguradora> listaSeguradoras)
+	{
+		Seguradora seguradora = Scan.Selecione("uma seguradora", listaSeguradoras);
+		if (seguradora == null) return;
+		Seguro seguro = Scan.Selecione("um sinistro", seguradora.getListaSeguros());
+		if (seguro == null) return;
+		Condutor condutor = Scan.Selecione("um condutor", seguro.getListaCondutores());
+		if (condutor == null) return;
+		
+		seguro.excluirCondutor(condutor);
+		
+	}
+	
+	public static void excluirSeguro (ArrayList<Seguradora> listaSeguradoras)
+	{
+		Seguradora seguradora = Scan.Selecione("uma seguradora", listaSeguradoras);
+		if (seguradora == null) return;
+		Seguro seguro = Scan.Selecione("um sinistro", seguradora.getListaSeguros());
+		if (seguro == null) return;
+		
+		seguradora.excluirSeguro(seguro);
+		
 	}
 	
 }

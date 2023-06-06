@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="Codes.Cliente"/>
     <fullyQualifiedTypeName name="Codes.MenuOperacoes.Cadastrar.tipoCliente"/>
     <fullyQualifiedTypeName name="java.util.Calendar"/>
     <fullyQualifiedTypeName name="Codes.CalcSeguro"/>
     <fullyQualifiedTypeName name="Codes.SeguroPF"/>
     <fullyQualifiedTypeName name="Codes.Sinistro"/>
+    <fullyQualifiedTypeName name="Codes.Validacao"/>
+    <fullyQualifiedTypeName name="Codes.Seguradora"/>
+    <fullyQualifiedTypeName name="Codes.Cliente"/>
+    <fullyQualifiedTypeName name="Codes.Scan"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="Codes.Veiculo"/>
+    <fullyQualifiedTypeName name="Codes.MenuOperacoes.Cadastrar.tipoSeguro"/>
+    <fullyQualifiedTypeName name="Codes.funcoesListar"/>
+    <fullyQualifiedTypeName name="Codes.funcoesExcluir"/>
+    <fullyQualifiedTypeName name="Codes.funcoesCadastrar"/>
+    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+    <fullyQualifiedTypeName name="java.text.ParseException"/>
 </qualifiedTypeNameHistroy>

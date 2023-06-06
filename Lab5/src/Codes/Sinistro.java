@@ -1,10 +1,11 @@
 package Codes;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Sinistro {
 
 	private int id;
-	private String data;
+	private Date data;
 	private String endereco;
 	private Seguradora seguradora;
 	private Condutor condutor;
@@ -19,7 +20,7 @@ public class Sinistro {
 	 * @param seguradora
 	 * @param condutor
 	 */
-	public Sinistro(String data, String endereco, Seguradora seguradora, Condutor condutor) {
+	public Sinistro(Date data, String endereco, Seguradora seguradora, Condutor condutor) {
 		super();
 		this.data = data;
 		this.endereco = endereco;
@@ -27,16 +28,17 @@ public class Sinistro {
 		this.condutor = condutor;		
 		
 		if (listaID == null)
-		{
-			listaID = new ArrayList<>();
+		{	
+			listaID = new ArrayList<Integer>();
 			listaID.add(0);
 			this.id = 0;
 
 		} else 
 		{
-			this.id = listaID.size();
-			listaID.add(listaID.size());
+			this.id = listaID.get(listaID.size()-1) + 1;
+			listaID.add(this.id);
 		}
+		
 	
 	}
 	
@@ -59,14 +61,14 @@ public class Sinistro {
 	/**
 	 * @return the data
 	 */
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 
 	/**
 	 * @param data the data to set
 	 */
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 

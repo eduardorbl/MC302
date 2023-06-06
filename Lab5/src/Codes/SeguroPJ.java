@@ -1,6 +1,5 @@
 package Codes;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class SeguroPJ extends Seguro {
@@ -14,15 +13,11 @@ public class SeguroPJ extends Seguro {
 	 * @param dataInicio
 	 * @param dataFim
 	 * @param seguradora
-	 * @param listaSinistros
-	 * @param listaCondutores
-	 * @param valorMensal
 	 * @param frota
 	 * @param cliente
 	 */
-	public SeguroPJ(int id, Date dataInicio, Date dataFim, Seguradora seguradora, ArrayList<Sinistro> listaSinistros,
-			ArrayList<Condutor> listaCondutores, int valorMensal, Frota frota, ClientePJ cliente) {
-		super(id, dataInicio, dataFim, seguradora);
+	public SeguroPJ(Date dataInicio, Date dataFim, Seguradora seguradora, Frota frota, ClientePJ cliente) {
+		super(dataInicio, dataFim, seguradora);
 		this.frota = frota;
 		this.cliente = cliente;
 	}

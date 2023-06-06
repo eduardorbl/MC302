@@ -6,8 +6,7 @@ public enum MenuOperacoesString {
 	LISTAR("(2)Listar"),
 	EXCLUIIR("(3)Excluir"),
 	GERARSINISTRO("(4)Gerar Sinistro"),
-	TRANSFERIRSEGURO("(5)Transferir Seguro"),
-	CALCULARRECEITASEGURADORA("(6)Calcular Receita Seguradora"),
+	CALCULARRECEITASEGURADORA("(5)Calcular Receita Seguradora"),
 	SAIR("(0)Sair");
 	
 	private final String operacao;
@@ -37,6 +36,9 @@ public enum MenuOperacoesString {
 		CLIENTE("(1)Cadastrar Cliente"),
 		VEICULO("(2)Cadastrar Veiculo"),
 		SEGURADORA("(3)Cadastrar Seguradora"),
+		CONDUTOR("(4)Cadastrar Condutor"),
+		FROTA("(5)Cadastrar Frota"),
+		SEGURO("(6)Cadastrar Seguro"),
 		VOLTAR("(0)Retornar ao menu anterior");
 		
 		private final String cadastro;
@@ -85,6 +87,36 @@ public enum MenuOperacoesString {
 					System.out.println(tipo.getTipo());
 				}
 			}
+			
+		}
+		
+		public enum tipoSeguro
+		{
+			
+			PF("(1)Seguro PF"),
+			PJ("(2)Seguro PJ"),
+			VOLTAR("(0)Retornar ao menu anterior");
+			
+			private final String tipo;
+			
+			private tipoSeguro(String tipo)
+			{
+				this.tipo = tipo;
+			}
+			
+			private String getTipo()
+			{
+				return tipo;
+			}
+			
+			public static void printarTipo()
+			{
+				for (tipoSeguro tipo: tipoSeguro.values())
+				{
+					System.out.println(tipo.getTipo());
+				}
+			}
+			
 		}
 		
 	}
@@ -94,10 +126,10 @@ public enum MenuOperacoesString {
 	{
 		
 		CLIENTEPORSEG("(1)Listar clientes por seguradora"),
-		SINISTROPORSEG("(2)Listar sinistros por seguradora"),
-		SINISTROPORCLIENTE("(3)Listar sinistros por cliente"),
-		VEICULOPORCLIENTE("(4)Listar veiculos por cliente"),
-		VEICULOPORSEGURADORA("(5)Listar veiculos por seguradora"),
+		SINISTROPORCLIENTE("(2)Listar sinistros por cliente"),
+		VEICULOPORCLIENTE("(3)Listar veiculos por cliente"),
+		CONDUTORPORSEGURADORA("(4)Listar condutor por seguro"),
+		SEGUROPORSEGURADORA("(5)Listar seguro por seguradora"),
 		VOLTAR("(0)Retornar ao menu anterior");
 		
 		private final String lista;
@@ -129,6 +161,10 @@ public enum MenuOperacoesString {
 		CLIENTE("(1)Excluir cliente"),
 		VEICULO("(2)Excluir veiculo"),
 		SINISTRO("(3)Excluir sinistro"),
+		SEGURADORA("(4)Excluir seguradora"),
+		FROTA("(5)Excluir frota"),
+		CONDUTOR("(6)Excluir condutor"),
+		SEGURO("(7)Excluir seguro"),
 		VOLTAR("(0)Retornar ao menu anterior");
 		
 		private final String exclusao;
